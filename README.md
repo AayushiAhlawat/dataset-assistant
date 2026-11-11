@@ -122,5 +122,3 @@ python scripts/chat_agent.py -m "housing time series" -k 10 -v
 2. **Phase 2** — Embeddings + semantic search (Chroma) — **implemented**
 3. **Phase 3** — LangGraph agent (clarify → retrieve → answer) — **implemented**
 4. **Phase 4+** — FastAPI + React UI (optional)
-
-Reference notebook: `uploads/Mini_DataGurus_LangGraph_With_OpenAI_4638.ipynb`
