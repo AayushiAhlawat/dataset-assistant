@@ -1,6 +1,6 @@
 # Hugging Face Dataset Discovery
 
-Conversational assistant for finding datasets on the [Hugging Face Hub](https://huggingface.co/datasets) using metadata sync, semantic search, and RAG chat (Phases 1–3).
+Conversational assistant for finding datasets on the [Hugging Face Hub](https://huggingface.co/datasets) using metadata sync, semantic search, RAG chat, and a web UI (Phases 1–4).
 
 **Deep dive (architecture, every file/function, flows):** [PROJECT_COMPLETE_STUDY_GUIDE.md](./PROJECT_COMPLETE_STUDY_GUIDE.md)
 
@@ -116,9 +116,27 @@ python scripts/chat_agent.py -m "datasets about youth unemployment in Africa"
 python scripts/chat_agent.py -m "housing time series" -k 10 -v
 ```
 
+## Phase 4: Web UI (FastAPI)
+
+Browser chat + quick search (same agent and Chroma index as the CLI).
+
+```bash
+pip install -r requirements.txt
+python scripts/run_web.py
+# Open http://127.0.0.1:8000
+```
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/health` | Chroma + OpenAI readiness |
+| `POST /api/search` | Semantic search only (no OpenAI) |
+| `POST /api/chat` | LangGraph agent (`thread_id` for multi-turn) |
+
+Files: `catalog_api/app.py`, `web/` (static UI), `scripts/run_web.py`.
+
 ### Roadmap
 
-1. **Phase 1** — HF metadata ETL (this repo)
-2. **Phase 2** — Embeddings + semantic search (Chroma) — **implemented**
-3. **Phase 3** — LangGraph agent (clarify → retrieve → answer) — **implemented**
-4. **Phase 4+** — FastAPI + React UI (optional)
+1. **Phase 1** — HF metadata ETL — **implemented**
+2. **Phase 2** — Embeddings + semantic search — **implemented**
+3. **Phase 3** — LangGraph agent — **implemented**
+4. **Phase 4** — FastAPI + web UI — **implemented**

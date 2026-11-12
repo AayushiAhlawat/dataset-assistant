@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HF Dataset Discovery</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1>HF Dataset Discovery</h1>
+        <p class="subtitle">
+          Chat with the catalog (Postgres + Chroma + LangGraph). Metadata only — not file downloads.
+        </p>
+        <p id="status" class="status" aria-live="polite">Checking backend…</p>
+      </header>
+
+      <div class="layout">
+        <main class="chat-panel">
+          <div id="messages" class="messages" role="log" aria-live="polite"></div>
+          <form id="chat-form" class="chat-form">
+            <textarea
+              id="message-input"
+              rows="2"
+              placeholder="Ask for datasets, e.g. medical imaging or salary data in Canada…"
+              required
+            ></textarea>
+            <div class="form-row">
+              <label class="top-k">
+                Top-k
+                <input id="top-k" type="number" min="1" max="20" value="8" />
+              </label>
+              <button type="submit" id="send-btn">Send</button>
+            </div>
+          </form>
+        </main>
+
+        <aside class="hits-panel" aria-label="Retrieved datasets">
+          <h2>Last retrieval</h2>
+          <div id="hits-list" class="hits-list"></div>
+        </aside>
+      </div>
+
+      <section class="search-panel">
+        <h2>Quick search (no OpenAI)</h2>
+        <form id="search-form" class="search-form">
+          <input id="search-query" type="text" placeholder="Semantic search query" required />
+          <button type="submit">Search</button>
+        </form>
+        <ol id="search-results" class="search-results"></ol>
+      </section>
+    </div>
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>

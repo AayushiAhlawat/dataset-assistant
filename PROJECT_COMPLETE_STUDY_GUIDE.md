@@ -1360,4 +1360,32 @@ Clarify-only turns: **one** OpenAI call.
 
 ---
 
-**End of Phase 1–3 study guide.** Consult repository source files for exact signatures and error handling when implementing changes.
+# 28. Phase 4 — Web UI (FastAPI)
+
+## 28.1 What it adds
+
+- **Browser chat** with the same LangGraph agent as `scripts/chat_agent.py`.
+- **Quick search** panel calling semantic search only (no OpenAI).
+- **`thread_id`** stored in browser `sessionStorage` for multi-turn follow-ups.
+
+## 28.2 Layout
+
+| Path | Role |
+|------|------|
+| `catalog_api/app.py` | FastAPI routes: `/api/health`, `/api/search`, `/api/chat`, `/` |
+| `catalog_api/runner.py` | Shared `run_chat_turn`, `run_semantic_search`, agent singleton |
+| `web/` | Static `index.html`, `app.js`, `styles.css` (served under `/static`) |
+| `scripts/run_web.py` | Uvicorn entry (`--host`, `--port`, `--reload`) |
+
+## 28.3 Run
+
+```bash
+python scripts/run_web.py
+# http://127.0.0.1:8000
+```
+
+**Prerequisites:** same as Phase 3 (Postgres, Chroma, `OPENAI_API_KEY` for chat). Search works without OpenAI if Chroma is ready.
+
+---
+
+**End of Phase 1–4 study guide.** Consult repository source files for exact signatures and error handling when implementing changes.
